@@ -6,22 +6,26 @@ public class Account {
 	private String name; //account 저장
 	private static Scanner sc;
 	
+	
 	Account (double a, String name){ //생성자
 		balance =  a;
-		name = this.name;
+		this.name = name;
 	}
 	public void credit(double money){ //입금
 		balance += money;
+		
+		
 	
 	}
 
 	public void debit(){ //출금
-		System.out.printf("Enter withdrawal account for %s: ",name);
 		double money ;
+		System.out.println("Enter withdrawal account for " + name + ": ");
+		sc = new Scanner(System.in);
 		money = sc.nextDouble();
 		if(balance - money < 0 ){
-			System.out.printf("subtracting %f from account2 balance", money);
-			System.out.print("Debit amount exceed account balance.");
+			System.out.printf("subtracting %f from account2 balance\n", money);
+			System.out.print("Debit amount exceed account balance\n.");
 		
 			
 			
@@ -33,6 +37,10 @@ public class Account {
 	
 	public double getBalance(){ //잔액확인
 		return balance;
+	}
+	
+	public double setBalance(){//잔액 수정
+		
 	}
 	
 
