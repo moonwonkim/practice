@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
-public class Account {
+public abstract class Account {
+	
+	abstract void getWithdrawableAccount(); //  현재 출금 가능한 금액
+	abstract void passTime(int day); // 기간을 인자로 받은후 이자 계산  
 	
 	protected double balance; //계좌
 	private String name; //account 저장
@@ -32,6 +35,7 @@ public class Account {
 	protected void setBalance(double balance){//잔액 수정
 		this.balance = balance;
 	}
+
 	
 
 }

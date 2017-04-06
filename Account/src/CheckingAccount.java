@@ -2,25 +2,30 @@ import java.util.Scanner;
 
 public class CheckingAccount extends Account{
 	
-	private double credit_limit ; //대출 한도 -100
+	private double credit_limit ; //대출 한도 
 	private double interest; //이자율 
 	private double loan_interest;//대출 이자율
+
+	CheckingAccount (double balance, double credit_limit, double interest, double loan_interest ){
+		super();
+		this.credit_limit = credit_limit;
+		this.balance = balance;
+		this.interest = interest;
+		this.loan_interest = loan_interest;
+		
 	
-	CheckingAccount (double a, String name){
-		super(a, name);
-		credit_limit = -100;
-		interest  = 100;
-		loan_interest = 100;
 	}
+	
 
 	@Override
 	public void debit(double money){ //한도까지 출금 -> 마이너스 통장가능
 		balance -= money;
-		if(balance - money < credit_limit) {
-			System.out.print("한도 초과입니다!!\n");
+		
+		if (balance < 0){
+			System.out.print("잔액이 0보다 작습니다.\n");
 		}
-		else if (balance < 0){
-			System.out.print("잔액이 0보다 작습니다.");
+		else if(balance - money < credit_limit) {
+			System.out.print("한도 초과입니다!!\n");
 		}
 		
 	}
@@ -31,7 +36,24 @@ public class CheckingAccount extends Account{
 			return balance;
 		}else{
 			balance = balance + (balance * 0.07);
-			return -balance;
+			return -(balance);
+		}
+	}
+	
+	public double getWthdrawableAccount(){ //현재 출금 가능한 금액
+		
+		return credit_limit + balance;
+	}
+	
+	public void passTime(int day){ // 기간을 인자로 받은후 이자 계산
+		balance += balance*day*interest;
+	}
+
+	public boolean isBankrupted(){
+		if(balance < -1*credit_limit){
+			return true;
+		}else{
+			return false;
 		}
 	}
 }
