@@ -39,8 +39,8 @@ public class CheckingAccount extends Account{
 			return -(balance);
 		}
 	}
-	
-	public double getWthdrawableAccount(){ //현재 출금 가능한 금액
+		
+	public double getWithdrawableAccount(){ //현재 출금 가능한 금액
 		
 		return credit_limit + balance;
 	}
@@ -51,6 +51,7 @@ public class CheckingAccount extends Account{
 
 	public boolean isBankrupted(){
 		if(balance < -1*credit_limit){
+			System.out.println("account1 went Bankrupt!");
 			return true;
 		}else{
 			return false;

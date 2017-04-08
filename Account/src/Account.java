@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public abstract class Account {
 	
-	abstract void getWithdrawableAccount(); //  현재 출금 가능한 금액
+	abstract double getWithdrawableAccount(); //  현재 출금 가능한 금액
 	abstract void passTime(int day); // 기간을 인자로 받은후 이자 계산  
 	
 	protected double balance; //계좌

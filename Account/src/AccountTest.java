@@ -1,38 +1,63 @@
 import java.util.Scanner;
 
 public class AccountTest {
-	private static Scanner sc;
+	private static Scanner scan;
 	private static double num; //입금 변수
 	public static void main(String[]args){
-		CheckingAccount acc1 = new CheckingAccount(100.0,"account1"); //1번째 계좌
-		CheckingAccount acc2 = new CheckingAccount(100.0,"account2");  //2번째 계좌
+		Account account1 = new CheckingAccount(100,50,0.01,0.07);
+		Account account2 = new SavingAccount(100,0.05);
 		
-		System.out.printf("Account1 balance: %f\n",acc1.getBalance());
-		System.out.printf("Account2 balance: %f\n",acc2.getBalance());
-	
-		sc = new Scanner(System.in);
-		System.out.print("Enter deposit amount for Account1: \n");
-		num = sc.nextDouble();
-		acc1.credit(num);
+		Scanner scan = new Scanner(System.in);
+		double amount;
+		//Checking Account
+		System.out.printf("Account1 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account1.getBalance(),account1.getWithdrawableAccount());
+		System.out.println("Enter withdrawal amount for Account1: ");
+		amount = scan.nextDouble();
+		account1.debit(amount);
 		
-		System.out.printf("Account1 balance: %f\n",acc1.getBalance());
-		System.out.printf("Account2 balance: %f\n",acc2.getBalance());
-	
-		System.out.printf("Enter withdrawal amount for Account 2: \n");
-		num = sc.nextDouble();
-		acc2.debit(num);
+		System.out.printf("Account1 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account1.getBalance(),account1.getWithdrawableAccount());
+		isBankrupted();
 		
-		System.out.printf("Account1 balance: %f\n",acc1.getBalance());
-		System.out.printf("Account2 balance: %f\n",acc2.getBalance());
+		account1.passTime(1);
+		
+		System.out.printf("Account1 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account1.getBalance(),account1.getWithdrawableAccount());
+		isBankrupted();
+		account1.passTime(5);
+		
+		System.out.printf("Account1 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account1.getBalance(),account1.getWithdrawableAccount());
+		
+		//Saving Account
+		System.out.println();
+		System.out.printf("Account2 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
 
-		System.out.print("next month!\n");
-		acc1.nextMonth();
-		acc2.nextMonth();
+		System.out.println("6 Month later!");
+		account2.passTime(6);
+		System.out.printf("Account2 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
+		account2.debit(50);
 		
-		System.out.printf("Account1 balance: %f\n",acc1.getBalance());
-		System.out.printf("Account2 balance: %f\n",acc2.getBalance());
+		System.out.println("next 6 Month later!");
+		account2.passTime(6);
+		System.out.printf("Account2 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
 		
+		System.out.println("next 1 month later!");
+		account2.passTime(1);
+		System.out.printf("Account2 balance: %.2f /t 현재 출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
+		account2.debit(50);
+		System.out.printf("Account2 balance: %.2f/t 현재 출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
+	
+		}
 
+
+
+	}		
 		
-	}
 }
