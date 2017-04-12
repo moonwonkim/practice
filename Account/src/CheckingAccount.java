@@ -19,14 +19,15 @@ public class CheckingAccount extends Account{
 
 	@Override
 	public void debit(double money){ //한도까지 출금 -> 마이너스 통장가능
-		balance -= money;
 		
 		if (balance < 0){
 			System.out.print("잔액이 0보다 작습니다.\n");
 		}
-		else if(balance - money < credit_limit) {
+		else if(balance - money < -1*credit_limit) {
 			System.out.print("한도 초과입니다!!\n");
 		}
+		
+		balance -= money;
 		
 	}
 	
@@ -46,11 +47,15 @@ public class CheckingAccount extends Account{
 	}
 	
 	public void passTime(int day){ // 기간을 인자로 받은후 이자 계산
-		balance += balance*day*interest;
+		if(balance > 0){
+			balance += balance*day*interest;
+		}else{
+			balance += balance*day*loan_interest;
+		}
 	}
 
 	public boolean isBankrupted(){
-		if(balance < -1*credit_limit){
+		if(balance < (-1)*credit_limit){
 			System.out.println("account1 went Bankrupt!");
 			return true;
 		}else{

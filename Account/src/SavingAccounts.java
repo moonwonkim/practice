@@ -15,20 +15,20 @@ public class SavingAccounts extends Account{
 			balance -= money;
 		}
 	}
-	
+	@Override
 	public double getWithdrawableAccount(){ //현재 출금 가능 금액
 		if(constract < 12){
 			return 0;
-		}else if(constract >= 12){
+		}else{
 			return balance;
-		} 
+		}
 	}
 	
 	public void passTime(int day){ //이자
 		if(constract < 12){
 			constract += day;
 		}else if(constract >= 12){
-			balance = balance* Math.pow(1+interest,day);
+			balance = balance* Math.pow(1+interest,12);
 		}
 	}
 	
