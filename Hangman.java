@@ -1,94 +1,94 @@
 package moonwonkim; //2016125006
 import java.io.*;
 import java.util.*;
-//Çà¸Ç°ÔÀÓ ¸¸µé±â
-//¿¹¿ÜÃ³¸® - ºóÄ­,ÇÑ±Û,´ë¼Ò¹®ÀÚ try catch »ç¿ëÇØº¸±â
-// ÁÖÁ¦¼±ÅÃ - ´Ü¾î ·£´ı »Ì±â
-// 5¹ø±îÁö ½ÇÆĞ°¡´É 6¹øÂ°¿¡´Â °ÔÀÓ ³¡
-// ½Ãµµ°¡´É È½¼ö Ãâ·ÂÇØÁÖ±â
-// °¡´ÉÇÏ¸é GUI·Î ±¸ÇöÇÏ±â
+//í–‰ë§¨ê²Œì„ ë§Œë“¤ê¸°
+//ì˜ˆì™¸ì²˜ë¦¬ - ë¹ˆì¹¸,í•œê¸€,ëŒ€ì†Œë¬¸ì try catch ì‚¬ìš©í•´ë³´ê¸°
+// ì£¼ì œì„ íƒ - ë‹¨ì–´ ëœë¤ ë½‘ê¸°
+// 5ë²ˆê¹Œì§€ ì‹¤íŒ¨ê°€ëŠ¥ 6ë²ˆì§¸ì—ëŠ” ê²Œì„ ë
+// ì‹œë„ê°€ëŠ¥ íšŸìˆ˜ ì¶œë ¥í•´ì£¼ê¸°
+// ê°€ëŠ¥í•˜ë©´ GUIë¡œ êµ¬í˜„í•˜ê¸°
 public class Hangman{
-	int remain; // ³²Àº ¹®ÀÚ¿­
-	int fail; //½ÇÆĞ È½¼ö
-	String hidden; //¼û°ÜÁø ¹®ÀÚ¿­
-	//StringBufferÀº °¡º¯ÀÇ ¼Ó¼ºÀ» °¡Áü StringBuilder¿Í ´Ù¸£°Ô µ¿±âÈ­º¸Àå
-	StringBuffer output; //Ãâ·Â ¹®ÀÚ¿­
-	StringBuffer input; //ÀÔ·Â ¹®ÀÚ¿­
+	int remain; // ë‚¨ì€ ë¬¸ìì—´
+	int fail; //ì‹¤íŒ¨ íšŸìˆ˜
+	String hidden; //ìˆ¨ê²¨ì§„ ë¬¸ìì—´
+	//StringBufferì€ ê°€ë³€ì˜ ì†ì„±ì„ ê°€ì§ StringBuilderì™€ ë‹¤ë¥´ê²Œ ë™ê¸°í™”ë³´ì¥
+	StringBuffer output; //ì¶œë ¥ ë¬¸ìì—´
+	StringBuffer input; //ì…ë ¥ ë¬¸ìì—´
 	
-	//IOException = ÀÔÃâ·Â ¿¹¿ÜÃ³¸®
-	public Hangman() throws IOException{ //Çà¸Ç »ı¼ºÀÚ
+	//IOException = ì…ì¶œë ¥ ì˜ˆì™¸ì²˜ë¦¬
+	public Hangman() throws IOException{ //í–‰ë§¨ ìƒì„±ì
 		Random R = new Random();
-		int random = R.nextInt(3); //·£´ıÀ¸·Î ¹®ÀÚ¿­À» »Ì´Â´Ù
+		int random = R.nextInt(3); //ëœë¤ìœ¼ë¡œ ë¬¸ìì—´ì„ ë½‘ëŠ”ë‹¤
 		if(random == 0){
 			hidden = "hello";
 		} else if (random == 1){
-			hidden = "administrator";
+			hidden = "apple";
 		} else if (random == 2){
-			hidden = "kanggun";
+			hidden = "bicycle";
 		}
 	}
 	
-	public void CheckString(char guess){ //ÀÔ·Â¹ŞÀº ¹®ÀÚ¿­ Ã¼Å© guess´Â »ç¿ëÀÚ ÀÔ·Â
-		boolean already = false; //already´Â ÀÌ¹Ì ÀÔ·ÂÇÑ ¹®ÀÚ¿­
+	public void CheckString(char guess){ //ì…ë ¥ë°›ì€ ë¬¸ìì—´ ì²´í¬ guessëŠ” ì‚¬ìš©ì ì…ë ¥
+		boolean already = false; //alreadyëŠ” ì´ë¯¸ ì…ë ¥í•œ ë¬¸ìì—´
 		for (int i = 0; i < input.length(); i++){
-			//charAt(index) = index¿¡ÀÖ´Â ¹®ÀÚ Ãâ·Â
-			if (input.charAt(i) == guess){ // »ç¿ëÀÚ°¡ ¶È°°Àº ¹®ÀÚ¿­À» ÀÔ·ÂÇßÀ»°æ¿ì fail¿¡¼­ Â÷°¨ x
-				System.out.println("\nÁßº¹µÈ ¹®ÀÚÀÔ´Ï´Ù. \nTry Again~");
-				already = true; //already¸¦ true°ªÀ¸·Î
+			//charAt(index) = indexì—ìˆëŠ” ë¬¸ì ì¶œë ¥
+			if (input.charAt(i) == guess){ // ì‚¬ìš©ìê°€ ë˜‘ê°™ì€ ë¬¸ìì—´ì„ ì…ë ¥í–ˆì„ê²½ìš° failì—ì„œ ì°¨ê° x
+				System.out.println("\nì¤‘ë³µëœ ë¬¸ìì…ë‹ˆë‹¤. \nTry Again~");
+				already = true; //alreadyë¥¼ trueê°’ìœ¼ë¡œ
 			}
 		}
 		
 		if (!already){
-			input.append(guess); //ÀÔ·ÂµÈ ¹®ÀÚ¿­¿¡ Ãß°¡
+			input.append(guess); //ì…ë ¥ëœ ë¬¸ìì—´ì— ì¶”ê°€
 			
-			boolean correct = false; //correct´Â ¸ÂÃá ¹®ÀÚ¿­
+			boolean correct = false; //correctëŠ” ë§ì¶˜ ë¬¸ìì—´
 			for(int i = 0; i < hidden.length(); i++){
-				if(hidden.charAt(i) == guess){ //¹®Á¦ÀÇ ¹®ÀÚ¿­¿¡ ÀÖ´Â ¹®ÀÚ¿­ÀÎÁö ºñ±³
-					//setCharAt(a,b) a¿¡ b¸¦ ³Ö´Â´Ù´Â °³³ä
-					output.setCharAt(i,guess); //ÇØ´çÇÏ´Â ¹®ÀÚ¿­ÀÌ ÀÖ´Â°æ¿ì '-'¸¦ ÀÔ·ÂÇÑ ¹®ÀÚ·Î º¯°æ
-					remain--; //³²¾ÆÀÖ´Â ¹®ÀÚ¼ö °¨¼Ò
-					correct = true; //ÀÔ·ÂÇÑ ¹®ÀÚ°¡ ¹®Á¦¿¡ ÀÖÀ»°æ¿ì true ¹İÈ¯
+				if(hidden.charAt(i) == guess){ //ë¬¸ì œì˜ ë¬¸ìì—´ì— ìˆëŠ” ë¬¸ìì—´ì¸ì§€ ë¹„êµ
+					//setCharAt(a,b) aì— bë¥¼ ë„£ëŠ”ë‹¤ëŠ” ê°œë…
+					output.setCharAt(i,guess); //í•´ë‹¹í•˜ëŠ” ë¬¸ìì—´ì´ ìˆëŠ”ê²½ìš° '-'ë¥¼ ì…ë ¥í•œ ë¬¸ìë¡œ ë³€ê²½
+					remain--; //ë‚¨ì•„ìˆëŠ” ë¬¸ììˆ˜ ê°ì†Œ
+					correct = true; //ì…ë ¥í•œ ë¬¸ìê°€ ë¬¸ì œì— ìˆì„ê²½ìš° true ë°˜í™˜
 				}
 			}
-			if(!correct){ //ÀÔ·ÂµÈ ¹®ÀÚ°¡ ¾øÀ»°æ¿ì ½ÇÆĞÈ½¼ö 1È¸¾¿ Áõ°¡
+			if(!correct){ //ì…ë ¥ëœ ë¬¸ìê°€ ì—†ì„ê²½ìš° ì‹¤íŒ¨íšŸìˆ˜ 1íšŒì”© ì¦ê°€
 				fail++;
 			}
 		}
 	}
 	
-	public int playGame() throws IOException{ //Çà¸Ç°ÔÀÓ½ÃÀÛ
+	public int playGame() throws IOException{ //í–‰ë§¨ê²Œì„ì‹œì‘
 		
 		output = new StringBuffer();
 		
 		for (int i = 0; i < hidden.length(); i++){
-			output.append('-'); //¹®ÀÚ¿­ÀÇ ±æÀÌ¸¸Å­ '-'·Î Ãâ·ÂÇÑ´Ù
+			output.append('-'); //ë¬¸ìì—´ì˜ ê¸¸ì´ë§Œí¼ '-'ë¡œ ì¶œë ¥í•œë‹¤
 		}
 		input = new StringBuffer();
 		
-		remain = hidden.length(); //³²¾ÆÀÖ´Â ¸ÂÃâ ¹®Á¦ÀÇ ¹®ÀÚ¼ö
+		remain = hidden.length(); //ë‚¨ì•„ìˆëŠ” ë§ì¶œ ë¬¸ì œì˜ ë¬¸ììˆ˜
 		fail = 0;
 		
-		System.out.println("´Ü¾î " + hidden.length() + "±ÛÀÚ \n"
+		System.out.println("ë‹¨ì–´ " + hidden.length() + "ê¸€ì \n"
 				+ "[" + output + "]");
 		
-	//	drawPicture(); //±³¼ö´ë ±×¸®±â
+	//	drawPicture(); //êµìˆ˜ëŒ€ ê·¸ë¦¬ê¸°
 		do{
 			CheckString(readString());
-			System.out.println("´Ü¾î " + hidden.length() + "±ÛÀÚ \n"
+			System.out.println("ë‹¨ì–´ " + hidden.length() + "ê¸€ì \n"
 					+"[" + output + "]");
-		//	drawPicture(); //Æ²¸° È½¼ö¿¡ µû¸¥ ±³¼ö´ë Ãâ·Â
-		}while((remain > 0) && (fail < 6)); //½ÇÆĞ±âÈ¸´Â 6¹ø 
+		//	drawPicture(); //í‹€ë¦° íšŸìˆ˜ì— ë”°ë¥¸ êµìˆ˜ëŒ€ ì¶œë ¥
+		}while((remain > 0) && (fail < 6)); //ì‹¤íŒ¨ê¸°íšŒëŠ” 6ë²ˆ 
 		
 		return fail;
 	}
 	
-	public char readString() throws IOException{ //ÀÔ·Â¹ŞÀº ¹®ÀÚ¿­ÀÇ Ã¹¹øÂ°¸¦ ¹İÈ¯
-		//BufferedReader´Â readLineÀ» ÅëÇÑ ¹®Àåº°·Î ÀĞ¾îÁÜ 
-		//InputStreamReader´Â ¹ÙÀÌÆ®½ºÆ®¸²À» ¹®ÀÚ½ºÆ®¸²À¸·Î ÀĞ¾îÁÜ
+	public char readString() throws IOException{ //ì…ë ¥ë°›ì€ ë¬¸ìì—´ì˜ ì²«ë²ˆì§¸ë¥¼ ë°˜í™˜
+		//BufferedReaderëŠ” readLineì„ í†µí•œ ë¬¸ì¥ë³„ë¡œ ì½ì–´ì¤Œ 
+		//InputStreamReaderëŠ” ë°”ì´íŠ¸ìŠ¤íŠ¸ë¦¼ì„ ë¬¸ììŠ¤íŠ¸ë¦¼ìœ¼ë¡œ ì½ì–´ì¤Œ
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String user;
 		
-		System.out.println("¹®ÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+		System.out.println("ë¬¸ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
 		user = in.readLine();
 		
 		return user.charAt(0);
@@ -101,7 +101,7 @@ public class Hangman{
 		System.out.println("   \n\n   ");
 		System.out.println("   |----------------|   ");
 	
-		switch(fail){ //½ÇÆĞ È½¼ö¸¸Å­ ±×¸²±×¸®±â
+		switch(fail){ //ì‹¤íŒ¨ íšŸìˆ˜ë§Œí¼ ê·¸ë¦¼ê·¸ë¦¬ê¸°
 		
 		case 0:
 			System.out.println("            |  ");
@@ -115,7 +115,7 @@ public class Hangman{
 			
 		case 1:
 			System.out.println("            |  ");
-			System.out.println("            ¡Û  ");
+			System.out.println("            â—‹  ");
 			System.out.println("            |  ");
 			System.out.println("            |  ");
 			System.out.println("            |  ");
@@ -125,7 +125,7 @@ public class Hangman{
 			break;	
 		case 2:
 			System.out.println("            |  ");
-			System.out.println("            ¡Û  ");
+			System.out.println("            â—‹  ");
 			System.out.println("          -----  ");
 			System.out.println("            |  ");
 			System.out.println("            |  ");
@@ -135,7 +135,7 @@ public class Hangman{
 			break;	
 		case 3:
 			System.out.println("            |  ");
-			System.out.println("            ¡Û  ");
+			System.out.println("            â—‹  ");
 			System.out.println("          -----  ");
 			System.out.println("          |   |  ");
 			System.out.println("            |  ");
@@ -146,7 +146,7 @@ public class Hangman{
 
 		case 4:
 			System.out.println("            |  ");
-			System.out.println("            ¡Û  ");
+			System.out.println("            â—‹  ");
 			System.out.println("          -----  ");
 			System.out.println("          |   |  ");
 			System.out.println("            |  ");
@@ -157,7 +157,7 @@ public class Hangman{
 			break;	
 		case 5:
 			System.out.println("            |  ");
-			System.out.println("            ¡Û  ");
+			System.out.println("            â—‹  ");
 			System.out.println("          -----  ");
 			System.out.println("          |   |  ");
 			System.out.println("            |  ");
