@@ -17,7 +17,7 @@ public class Hangman{
 	StringBuffer output; //출력 문자열
 	StringBuffer input; //입력 문자열
 	//IOException = 입출력 예외처리
-	public Hangman() throws IOException{ //생성자에 단어를 선택하는것을 넣엇다
+	public Hangman() throws IOException{ //생성자에 단어선택과 그림그리는것을 넣었다.
 		dr = new DrawPicture();
 		dr.drawPicture(fail);
 		WordSelection ws = new WordSelection();
@@ -25,7 +25,7 @@ public class Hangman{
 	} //행맨 생성자 
 	
 	
-	public char readString() throws IOException{ //입력받은 문자열의 첫번째를 반환
+	public char readString() throws IOException{ //사용자에게 문자열을 입력받아 입력받은 문자열의 첫번째를 반환
 		//BufferedReader는 readLine을 통한 문장별로 읽어줌 
 		//InputStreamReader는 바이트스트림을 문자스트림으로 읽어줌
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -64,7 +64,7 @@ public class Hangman{
 					//setCharAt(a,b) a에 b를 넣는다는 개념
 					output.setCharAt(i,userInput); //해당하는 문자열이 있는경우 '-'를 입력한 문자로 변경
 					remain--; //남아있는 문자수 감소
-					correct = true; //입력한 문자가 문제에 있을경우 true 반환
+					correct = true; //맞춘경우 true반환
 				}
 			}
 			if(!correct){ //입력된 문자가 없을경우 실패횟수 1회씩 증가
@@ -100,7 +100,7 @@ public class Hangman{
 			}
 			
 			dr.drawPicture(fail); //틀린 횟수에 따른 그림 출력
-		}while((remain > 0) && (fail < 6)); //실패기회는 6번 
+		}while((remain > 0) && (fail < 6)); //6번 틀리면 게임은 끝난다.
 		
 		return fail;
 	}
