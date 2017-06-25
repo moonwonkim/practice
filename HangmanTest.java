@@ -21,7 +21,7 @@ public class HangmanTest {
 			System.out.println("Your level: soso~!!");
 		}else{
 			System.out.println("Your answer is incorrect!!");
-			System.out.println("You are die!!");
+			System.out.println("Game Over.. ");
 		}
 	
 	}
