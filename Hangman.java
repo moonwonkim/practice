@@ -7,7 +7,7 @@ import java.util.*;
 //출력 - 랜덤단어, 교수대 그림
 // 추가하고 싶은점 - 단어주제를 선택해서 뽑기, 플레이어 수를 두기
 // 6/24일 Hangman 생성자내에 단어를 선택하는 WordSelection을 추가하였다. 또한 공백을 입력받을때 시도회수가 차감하는 경우를 없앴다.
-// 6/25일 DrawPicture 클래스로 그림출력을 만듬 
+// 6/25일 DrawPicture 클래스로 그림출력을 만듬 , 대소문자 구분없이 소문자로 입력받기.
 public class Hangman{
 	int remain; // 남은 문자열
 	int fail; //실패 횟수
@@ -32,7 +32,7 @@ public class Hangman{
 		String user;
 		
 		System.out.println("문자를 입력해주세요: ");
-		user = in.readLine();
+		user = in.readLine().toLowerCase();
 		if(user.length()==0){
 			System.out.println("enter를 입력했습니다 다시입력하세요! ");
 			fail -= 1;
