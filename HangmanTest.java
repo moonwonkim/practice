@@ -20,7 +20,7 @@ public class HangmanTest {
 			System.out.println("Your are Win!!");
 			System.out.println("Your level: soso~!!");
 		}else{
-			System.out.println("Your are Win!!");
+			System.out.println("Your are Lose!!");
 			System.out.println("Game Over.. ");
 		}
 	
